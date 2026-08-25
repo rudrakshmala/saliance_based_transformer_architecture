@@ -1,0 +1,115 @@
+{
+  "config": {
+    "d_model": 128,
+    "n_layers": 24
+  },
+  "baseline": {
+    "memory_precision": 0.8333333332754629,
+    "memory_recall": 0.8333333332754629,
+    "memory_f1": 0.8333333282754629,
+    "retrieval_precision": 0.7999999999333334,
+    "retrieval_recall": 0.9999999998958334,
+    "retrieval_f1": 0.888888883868313,
+    "retrieval_ece": 0.0,
+    "contradiction_detection_acc": 0.9999999995833333,
+    "overwrite_accuracy": 0.9999999994444444,
+    "stale_memory_suppression": 0.9999999994444444,
+    "response_bleu": 0.999999995,
+    "response_rouge_l": 0.999999995,
+    "factual_consistency": 0.9166666664293981
+  },
+  "fstb": {
+    "memory_precision": 0.8333333332754629,
+    "memory_recall": 0.8333333332754629,
+    "memory_f1": 0.8333333282754629,
+    "retrieval_precision": 0.7999999999333334,
+    "retrieval_recall": 0.9999999998958334,
+    "retrieval_f1": 0.888888883868313,
+    "retrieval_ece": 0.0,
+    "contradiction_detection_acc": 0.9999999995833333,
+    "overwrite_accuracy": 0.9999999994444444,
+    "stale_memory_suppression": 0.9999999994444444,
+    "response_bleu": 0.999999995,
+    "response_rouge_l": 0.999999995,
+    "factual_consistency": 0.9166666664293981
+  },
+  "stat_tests": {
+    "mean_fstb": 0.9097222195391268,
+    "mean_baseline": 0.9097222195391268,
+    "diff_mean": 0.0,
+    "p_value_ttest": null,
+    "p_value_wilcoxon": 1.0,
+    "cohens_d": 0.0,
+    "ci_95_fstb": [
+      0.7992206082667531,
+      1.0202238308115006
+    ],
+    "ci_95_baseline": [
+      0.7992206082667531,
+      1.0202238308115006
+    ],
+    "statistically_significant": false
+  },
+  "ablations": {
+    "full_fstb": {
+      "memory_precision": 0.8333333332465278,
+      "memory_recall": 0.8333333332465278,
+      "memory_f1": 0.833333328246528,
+      "retrieval_precision": 0.7999999999,
+      "retrieval_recall": 0.9999999998437501,
+      "retrieval_f1": 0.8888888838271607,
+      "retrieval_ece": 0.025000000000000022,
+      "contradiction_detection_acc": 0.999999999375,
+      "overwrite_accuracy": 0.9999999989999999,
+      "stale_memory_suppression": 0.9999999989999999,
+      "response_bleu": 0.999999995,
+      "response_rouge_l": 0.999999995,
+      "factual_consistency": 0.9166666663107639
+    },
+    "no_stage_a": {
+      "memory_precision": 0.8333333332465278,
+      "memory_recall": 0.8333333332465278,
+      "memory_f1": 0.833333328246528,
+      "retrieval_precision": 0.7999999999,
+      "retrieval_recall": 0.9999999998437501,
+      "retrieval_f1": 0.8888888838271607,
+      "retrieval_ece": 0.025000000000000022,
+      "contradiction_detection_acc": 0.999999999375,
+      "overwrite_accuracy": 0.9999999989999999,
+      "stale_memory_suppression": 0.9999999989999999,
+      "response_bleu": 0.999999995,
+      "response_rouge_l": 0.999999995,
+      "factual_consistency": 0.9166666663107639
+    },
+    "no_stage_b": {
+      "memory_precision": 0.8333333332465278,
+      "memory_recall": 0.8333333332465278,
+      "memory_f1": 0.833333328246528,
+      "retrieval_precision": 0.7999999999,
+      "retrieval_recall": 0.9999999998437501,
+      "retrieval_f1": 0.8888888838271607,
+      "retrieval_ece": 0.025000000000000022,
+      "contradiction_detection_acc": 0.999999999375,
+      "overwrite_accuracy": 0.9999999989999999,
+      "stale_memory_suppression": 0.9999999989999999,
+      "response_bleu": 0.999999995,
+      "response_rouge_l": 0.999999995,
+      "factual_consistency": 0.9166666663107639
+    },
+    "no_stage_c": {
+      "memory_precision": 0.8333333332465278,
+      "memory_recall": 0.8333333332465278,
+      "memory_f1": 0.833333328246528,
+      "retrieval_precision": 0.7999999999,
+      "retrieval_recall": 0.9999999998437501,
+      "retrieval_f1": 0.8888888838271607,
+      "retrieval_ece": 0.025000000000000022,
+      "contradiction_detection_acc": 0.999999999375,
+      "overwrite_accuracy": 0.9999999989999999,
+      "stale_memory_suppression": 0.9999999989999999,
+      "response_bleu": 0.999999995,
+      "response_rouge_l": 0.999999995,
+      "factual_consistency": 0.9166666663107639
+    }
+  }
+}

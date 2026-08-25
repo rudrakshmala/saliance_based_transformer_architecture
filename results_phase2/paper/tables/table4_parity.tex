@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Parameter Parity Verification.} Exact parameter counts and relative percentage differences across controlled model variants.}
+\label{tab:parameter_parity}
+\begin{tabular}{l c c}
+\toprule
+\textbf{Model Architecture} & \textbf{Parameter Count} & \textbf{Relative Parity Difference (\%)} \\
+\midrule
+Model A (Baseline) & 4,554,880 & --- \\
+Model B (AuxBaseline) & 4,554,963 & 0.003\% \\
+Model C (FSTB) & 4,555,105 & 0.005\% \\
+\midrule
+\textbf{Maximum Difference} & \textbf{---} & \textbf{0.005\% (Threshold: $<$2.0\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}

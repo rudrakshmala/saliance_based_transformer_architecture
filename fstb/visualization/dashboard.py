@@ -1,0 +1,94 @@
+import os
+from typing import Dict, Any
+
+class FSTBDashboardGenerator:
+    """Generates an HTML and Markdown evaluation dashboard report with embedded figures and tables."""
+    
+    @staticmethod
+    def generate_html_report(
+        results_summary: Dict[str, Any],
+        ablation_summary: Dict[str, Dict[str, float]],
+        stat_summary: Dict[str, Any],
+        output_html_path: str
+    ):
+        pv_t = stat_summary.get('p_value_ttest')
+        pv_t_str = f"{pv_t:.6f}" if pv_t is not None else "N/A (train models first)"
+        html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FSTB Research Dashboard &amp; Benchmark Report</title>
+    <style>
+        body {{ font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; background-color: #f8f9fa; color: #333; }}
+        h1, h2, h3 {{ color: #1a252f; }}
+        .card {{ background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 25px; }}
+        table {{ width: 100%; border-collapse: collapse; margin-top: 15px; }}
+        th, td {{ padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }}
+        th {{ background-color: #2c3e50; color: white; }}
+        tr:nth-child(even) {{ background-color: #f2f2f2; }}
+        .metric-badge {{ display: inline-block; padding: 6px 12px; background: #e8f4f8; color: #2980b9; border-radius: 4px; font-weight: bold; margin-right: 10px; margin-bottom: 6px; }}
+        .sig-box {{ background: #e8f8f5; border-left: 5px solid #27ae60; padding: 15px; margin: 15px 0; }}
+        .note-box {{ background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 15px 0; font-size: 0.9em; }}
+    </style>
+</head>
+<body>
+    <h1>Functionally Specialized Transformer Blocks (FSTB)</h1>
+    <h2>Research Dashboard &amp; Benchmark Evaluation Report</h2>
+
+    <div class="card">
+        <div class="note-box">
+            <strong>Note:</strong> Metrics are identical for baseline and FSTB in the pre-training prototype stage.
+            Divergence will appear after supervised training with the auxiliary loss objectives.
+            This dashboard validates the framework infrastructure end-to-end.
+        </div>
+        <h3>Core Model Comparison</h3>
+        <span class="metric-badge">FSTB Memory F1: {results_summary.get('fstb', {}).get('memory_f1', 0):.4f}</span>
+        <span class="metric-badge">Baseline Memory F1: {results_summary.get('baseline', {}).get('memory_f1', 0):.4f}</span>
+        <span class="metric-badge">FSTB Contradiction Acc: {results_summary.get('fstb', {}).get('contradiction_detection_acc', 0):.4f}</span>
+        <span class="metric-badge">Baseline Contradiction Acc: {results_summary.get('baseline', {}).get('contradiction_detection_acc', 0):.4f}</span>
+    </div>
+
+    <div class="card">
+        <h3>Statistical Significance Analysis</h3>
+        <div class="sig-box">
+            <p><strong>Paired t-test p-value:</strong> {pv_t_str}</p>
+            <p><strong>Wilcoxon signed-rank p-value:</strong> {stat_summary.get('p_value_wilcoxon', 1.0):.6f}</p>
+            <p><strong>Cohen's d Effect Size:</strong> {stat_summary.get('cohens_d', 0.0):.4f}</p>
+            <p><strong>Statistically Significant:</strong> {stat_summary.get('statistically_significant', False)}</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Ablation Matrix Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ablation Condition</th>
+                    <th>Memory Precision</th>
+                    <th>Memory Recall</th>
+                    <th>Memory F1</th>
+                    <th>Contradiction Acc</th>
+                </tr>
+            </thead>
+            <tbody>
+"""
+        for name, metrics in ablation_summary.items():
+            html_content += f"""
+                <tr>
+                    <td><strong>{name}</strong></td>
+                    <td>{metrics.get('memory_precision', 0.0):.4f}</td>
+                    <td>{metrics.get('memory_recall', 0.0):.4f}</td>
+                    <td>{metrics.get('memory_f1', 0.0):.4f}</td>
+                    <td>{metrics.get('contradiction_detection_acc', 0.0):.4f}</td>
+                </tr>"""
+
+        html_content += """
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>"""
+
+        os.makedirs(os.path.dirname(output_html_path), exist_ok=True)
+        with open(output_html_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
